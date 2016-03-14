@@ -1,0 +1,25 @@
+{
+  "name": "@warelab/maizev4-search",
+  "version": "1.0.0",
+  "description": "Web service that serves search results for an Ensembl instance containing the new Maize v4 genome",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/warelab/maizev4-search.git"
+  },
+  "author": "mycrobe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/warelab/maizev4-search/issues"
+  },
+  "homepage": "https://github.com/warelab/maizev4-search#readme",
+  "dependencies": {
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "gramene-search-client": "^2.6.3",
+    "q": "^1.4.1"
+  }
+}
