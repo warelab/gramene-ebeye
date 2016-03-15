@@ -51,6 +51,11 @@ function translateRequestParams(ensemblParams) {
     result.fq = 'system_name:' + speciesToSystemName(ensemblQuery.species);
   }
 
+  if(ensemblParams.facetcount && ensemblParams.facetcount > 0) {
+    result['facet.field'] = "{!facet.limit='#' facet.mincount='1' key='system_name'}system_name"
+      .replace('#', ensemblParams.facetcount);
+  }
+
   return result;
 }
 

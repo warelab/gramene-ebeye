@@ -8,13 +8,14 @@ var _ = require('lodash');
 jasminePit.install(global);
 
 describe("translateRequestParams functionality", function () {
-  var translateResponseDocument, countFixture, resultsFixture;
+  var translateResponseDocument, countFixture, resultsFixture, facetedFixture;
 
   beforeEach(function () {
     var fixtures = require('../support/v50search.json');
     translateResponseDocument = require('../../src/translateResponseDocument');
     countFixture = fixtures.pad_norows;
     resultsFixture = fixtures.pad_rows;
+    facetedFixture = fixtures.faceted;
   });
 
   it("should error if doc is missing", function () {
@@ -38,7 +39,7 @@ describe("translateRequestParams functionality", function () {
     expect(formattedResponse.hitCount).toEqual(countFixture.obj.response.numFound);
   });
 
-  it("should get an empty facets array", function () {
+  it("should get an facets array", function () {
     // given
     var formattedResponse = translateResponseDocument(countFixture);
 
@@ -121,4 +122,22 @@ describe("translateRequestParams functionality", function () {
       "genetree": []
     });
   });
+
+  it("should reformat facet data", function() {
+    var facets = translateResponseDocument(facetedFixture).facets;
+    var first = _.head(facets);
+    var firstValue = _.head(first.facetValues);
+
+
+    expect(facets).toEqual(jasmine.any(Array));
+    expect(facets.length).toEqual(1);
+    expect(first.id).toEqual('TAXONOMY');
+    expect(first.label).toEqual('Organisms');
+    expect(first.facetValues.length).toEqual(11);
+    expect(firstValue.label).toEqual('brassica_rapa');
+    expect(firstValue.value).toEqual('brassica_rapa');
+    expect(firstValue.count).toEqual(5);
+  });
+
+
 });

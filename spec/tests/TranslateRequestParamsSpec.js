@@ -37,4 +37,17 @@ describe("translateRequestParams functionality", function () {
 
       //fl=id,name,description,taxon_id,region,start,end,system_name,db_type,genetree
   });
+
+  it("should facet on system_name if facetcount=1000 is present", function() {
+    // given
+    var params = translateRequestParams({
+      query:'foo AND genomic_unit:plants AND species:elephant',
+      size:'0',
+      format:'json',
+      facetcount:'1000'
+    });
+
+    expect(params['facet.field'])
+      .toEqual("{!facet.limit='1000' facet.mincount='1' key='system_name'}system_name");
+  });
 });

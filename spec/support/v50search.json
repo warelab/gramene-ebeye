@@ -252,5 +252,49 @@
         "facet_ranges":{},
         "facet_intervals":{},
         "facet_heatmaps":{}}}
+  },
+  "faceted": {
+    "query": "http://data.gramene.org/v50/search?rows=0&q=pad&fl=id,name,description,taxon_id,region,start,end,system_name,db_type,genetree,synonyms&facet.field={!facet.limit=%271000%27%20facet.mincount=%271%27%20key=%27system_name%27}system_name",
+    "obj": {
+      "responseHeader":{
+        "status":0,
+        "QTime":4,
+        "params":{
+          "facet":"true",
+          "fl":["id",
+            "name",
+            "description",
+            "taxon_id",
+            "region",
+            "start",
+            "end",
+            "system_name",
+            "db_type",
+            "genetree",
+            "synonyms"],
+          "q":"pad",
+          "facet.field":"{!facet.limit='1000' facet.mincount='1' key='system_name'}system_name",
+          "rows":"0"}},
+      "response":{"numFound":20,"start":0,"docs":[]
+      },
+      "facet_counts":{
+        "facet_queries":{},
+        "facet_fields":{
+          "system_name":[
+            "brassica_rapa",5,
+            "arabidopsis_thaliana",2,
+            "medicago_truncatula",2,
+            "oryza_sativa",2,
+            "theobroma_cacao",2,
+            "zea_mays",2,
+            "aegilops_tauschii",1,
+            "hordeum_vulgare",1,
+            "oryza_glaberrima",1,
+            "oryza_punctata",1,
+            "triticum_aestivum",1]},
+        "facet_dates":{},
+        "facet_ranges":{},
+        "facet_intervals":{},
+        "facet_heatmaps":{}}}
   }
 }

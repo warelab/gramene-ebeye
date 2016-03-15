@@ -18,13 +18,44 @@ function translateResponseDocument(response) {
 
   return {
     hitCount: getHitCount(doc),
-    facets: [],
+    facets: getFacets(doc),
     entries: getEntries(doc)
   };
 }
 
 function getHitCount(doc) {
   return _.get(doc, 'response.numFound');
+}
+
+function getFacets(doc) {
+  var facetValues = getSystemNameFacetValues(doc);
+  if(facetValues.length) {
+    return [
+      {
+        id: 'TAXONOMY',
+        label: 'Organisms',
+        total: facetValues.length,
+        facetValues: facetValues
+      }
+    ]
+  }
+  else {
+    return [];
+  }
+}
+
+function getSystemNameFacetValues(doc) {
+  var facet = _.get(doc, 'facet_counts.facet_fields.system_name');
+
+  return _.reduce(facet, function(acc, item, idx) {
+      if(idx % 2 === 0) {
+        acc.push({label: item, value: item});
+      }
+      else {
+        _.last(acc).count = item;
+      }
+      return acc;
+    }, []);
 }
 
 function getEntries(doc) {
