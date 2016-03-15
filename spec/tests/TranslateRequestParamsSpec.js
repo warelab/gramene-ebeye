@@ -1,7 +1,6 @@
 "use strict";
 
 var Q = require('q');
-var searchFixtures = require('../support/v50search.json');
 var jasminePit = require('jasmine-pit');
 var _ = require('lodash');
 
