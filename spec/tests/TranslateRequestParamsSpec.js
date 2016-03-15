@@ -23,4 +23,17 @@ describe("translateRequestParams functionality", function () {
     expect(function () {translateRequestParams({query:'foo AND genomic_unit:plants AND species:elephant', size:'0', format:'foo'})}).toThrow(new Error("Not expecting a requested format of foo"));
     expect(function () {translateRequestParams({query:'foo AND genomic_unit:plants AND species:elephant', size:'0', format:'json'})}).not.toThrow();
   });
+
+  it("should include a fl param for SOLR", function() {
+    // given
+    var params = translateRequestParams({
+      query:'foo AND genomic_unit:plants AND species:elephant',
+      size:'0',
+      format:'json'
+    });
+
+    expect(params.fl).toEqual("id,name,description,taxon_id,region,start,end,system_name,db_type,genetree");
+
+      //fl=id,name,description,taxon_id,region,start,end,system_name,db_type,genetree
+  });
 });
