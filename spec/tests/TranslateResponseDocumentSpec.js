@@ -128,7 +128,6 @@ describe("translateRequestParams functionality", function () {
     var first = _.head(facets);
     var firstValue = _.head(first.facetValues);
 
-
     expect(facets).toEqual(jasmine.any(Array));
     expect(facets.length).toEqual(1);
     expect(first.id).toEqual('TAXONOMY');
