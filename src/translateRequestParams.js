@@ -8,7 +8,7 @@ const EXPECTED_GENOMIC_UNIT = 'plants';
 const FL = "id,name,description,taxon_id,region,start,end,system_name,db_type,genetree,synonyms";
 
 function translateRequestParams(ensemblParams) {
-  var ensemblQuery;
+  var ensemblQuery, result;
 
   if (!_.isObject(ensemblParams)) {
     throw new Error('ensemblParams should be an object! It is ' + ensemblParams);
@@ -28,8 +28,8 @@ function translateRequestParams(ensemblParams) {
     throw new Error("genomic_unit should be plants; instead it's " + ensemblQuery.genomic_unit);
   }
 
-  if (!ensemblQuery.q || !ensemblQuery.species) {
-    throw new Error("Did not find q param or species param. We need those.");
+  if (!ensemblQuery.q) {
+    throw new Error("Did not find q param. We need that one.");
   }
 
   if (ensemblParams.format !== EXPECTED_FORMAT) {
@@ -40,13 +40,18 @@ function translateRequestParams(ensemblParams) {
     throw new Error("Not expected fields parameter value to be " + ensemblParams.fields);
   }
 
-  return {
+  result = {
     q: ensemblQuery.q,
     fl: FL,
-    fq: 'system_name:' + speciesToSystemName(ensemblQuery.species),
     rows: ensemblParams.size,
     start: ensemblParams.start || 0
   };
+
+  if(ensemblQuery.species) {
+    result.fq = 'system_name:' + speciesToSystemName(ensemblQuery.species);
+  }
+
+  return result;
 }
 
 function processEnsemblQueryString(qs) {
