@@ -2,6 +2,8 @@
 
 const DEFAULT_PORT = 11011;
 
+global.gramene = {defaultServer: "http://brie:20050/v50/zm4/swagger"};
+
 var express = require('express')
   , cors = require('cors')
   , search = require('./src/search.js')
