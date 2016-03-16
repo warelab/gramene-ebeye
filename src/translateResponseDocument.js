@@ -7,7 +7,7 @@ var taxonomyLUT = require('./taxonomyLUT');
 function translateResponseDocument(response) {
   var doc;
 
-  if(!_.isObject(response)) {
+  if (!_.isObject(response)) {
     throw new Error("Response is not an object: " + response);
   }
 
@@ -30,7 +30,7 @@ function getHitCount(doc) {
 
 function getFacets(doc) {
   var facetValues = getSystemNameFacetValues(doc);
-  if(facetValues.length) {
+  if (facetValues.length) {
     return [
       {
         id: 'TAXONOMY',
@@ -48,21 +48,24 @@ function getFacets(doc) {
 function getSystemNameFacetValues(doc) {
   var facet = _.get(doc, 'facet_counts.facet_fields.system_name');
 
-  return _.reduce(facet, function(acc, system_name, idx) {
-      var taxon = taxonomyLUT[system_name];
+  return _.reduce(facet, function (acc, item, idx) {
+    var taxon, label, value;
 
-      // deal with SOLR's [key1,val1,   key2,val2,   ...,   keyn,valuen] array structure.
-      if(idx % 2 === 0) {
-        acc.push({
-          label: _.get(taxon, 'name', system_name),
-          value: '' + _.get(taxon, 'taxon_id', system_name)
-        });
-      }
-      else {
-        _.last(acc).count = system_name;
-      }
-      return acc;
-    }, []);
+    // deal with SOLR's [key1,val1,   key2,val2,   ...,   keyn,valuen] array structure.
+    if (idx % 2 === 0) {
+      taxon = taxonomyLUT[item];
+      label = _.get(taxon, 'name', item);
+      value = '' + _.get(taxon, 'taxon_id', item);
+
+      // first the key
+      acc.push({ label: label, value: value });
+    }
+    else {
+      // then the value;
+      _.last(acc).count = item;
+    }
+    return acc;
+  }, []);
 }
 
 function getEntries(doc) {
@@ -73,7 +76,7 @@ function translateResult(result) {
   checkFields(result);
 
   return {
-    id: result.id,
+    id: result.id.replace(/_projected$/, ''),
     source: 'ensemblGenomes_gene',
     fields: translateFields(result)
   }
@@ -83,7 +86,7 @@ function translateFields(result) {
   var species = _.get(taxonomyLUT[result.system_name], 'name', result.system_name);
 
   return {
-    id: [result.id],
+    id: [result.id.replace(/_projected$/, '')],
     name: [result.name + ' [' + result.id + ']'],
     description: [result.description],
     location: [result.region + ':' + result.start + '-' + result.end],
@@ -102,11 +105,11 @@ function translateFields(result) {
 }
 
 function checkFields(doc) {
-  FL.forEach(function(field) {
+  FL.forEach(function (field) {
     // it's optional.
-    if(field === 'genetree' || field === 'synonyms') return;
+    if (field === 'genetree' || field === 'synonyms') return;
 
-    if(!doc[field]) {
+    if (!doc[field]) {
       throw new Error("Doc " + doc.id + " missing field " + field);
     }
   });
