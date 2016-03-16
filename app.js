@@ -4,6 +4,8 @@ const DEFAULT_PORT = 11011;
 
 global.gramene = {defaultServer: "http://brie:20050/v50/zm4/swagger"};
 
+require('./src/taxonomyLUT'); // warm this up prior to first use, hopefully.
+
 var express = require('express')
   , cors = require('cors')
   , search = require('./src/search.js')

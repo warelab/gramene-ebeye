@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var FL = require('./translateRequestParams').FL.split(',');
+var taxonomyLUT = require('./taxonomyLUT');
 
 function translateResponseDocument(response) {
   var doc;
@@ -47,12 +48,18 @@ function getFacets(doc) {
 function getSystemNameFacetValues(doc) {
   var facet = _.get(doc, 'facet_counts.facet_fields.system_name');
 
-  return _.reduce(facet, function(acc, item, idx) {
+  return _.reduce(facet, function(acc, system_name, idx) {
+      var taxon = taxonomyLUT[system_name];
+
+      // deal with SOLR's [key1,val1,   key2,val2,   ...,   keyn,valuen] array structure.
       if(idx % 2 === 0) {
-        acc.push({label: item, value: item});
+        acc.push({
+          label: _.get(taxon, 'name', system_name),
+          value: '' + _.get(taxon, 'taxon_id', system_name)
+        });
       }
       else {
-        _.last(acc).count = item;
+        _.last(acc).count = system_name;
       }
       return acc;
     }, []);
@@ -73,12 +80,14 @@ function translateResult(result) {
 }
 
 function translateFields(result) {
+  var species = _.get(taxonomyLUT[result.system_name], 'name', result.system_name);
+
   return {
     id: [result.id],
     name: [result.name + ' [' + result.id + ']'],
     description: [result.description],
     location: [result.region + ':' + result.start + '-' + result.end],
-    species: [result.system_name],
+    species: [species],
     system_name: [result.system_name],
     database: [result.db_type],
     genetree: result.genetree ? [result.genetree] : [],
