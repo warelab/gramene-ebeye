@@ -1,6 +1,6 @@
 {
   "name": "@warelab/maizev4-search",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Web service that serves search results for an Ensembl instance containing the new Maize v4 genome",
   "main": "app.js",
   "scripts": {
