@@ -50,4 +50,40 @@ describe("translateRequestParams functionality", function () {
     expect(params['facet.field'])
       .toEqual("{!facet.limit='1000' facet.mincount='1' key='system_name'}system_name");
   });
+
+  it("should correctly munge the species parameter to system_name", function() {
+    // given
+    var params = translateRequestParams({
+      query:'foo AND genomic_unit:plants AND species:FOO bar',
+      size:'0',
+      format:'json',
+      facetcount:'1000'
+    });
+
+    expect(params.fq).toEqual('system_name:foo_bar');
+  });
+
+  it("should correctly munge the species parameter for Oryza", function() {
+    // given
+    var params = translateRequestParams({
+      query:'foo AND genomic_unit:plants AND species:Oryza sativa Japonica',
+      size:'0',
+      format:'json',
+      facetcount:'1000'
+    });
+
+    expect(params.fq).toEqual('system_name:oryza_sativa');
+  });
+
+  it("should correctly munge the species parameter for Zea mays", function() {
+    // given
+    var params = translateRequestParams({
+      query:'foo AND genomic_unit:plants AND species:Zea mays',
+      size:'0',
+      format:'json',
+      facetcount:'1000'
+    });
+
+    expect(params.fq).toEqual('system_name:(zea_mays zea_mays4m)');
+  });
 });

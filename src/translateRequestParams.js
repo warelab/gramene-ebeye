@@ -84,10 +84,21 @@ function processEnsemblQueryTerm(term) {
 }
 
 function speciesToSystemName(species) {
+  var result;
   if (!_.isString(species)) {
     throw new Error("Supplied species is not a string: " + species);
   }
-  return species.toLowerCase().replace(/ /g, '_');
+
+  if(species === 'Oryza sativa Japonica') {
+    result = 'oryza_sativa';
+  }
+  else if(species === 'Zea mays') {
+    result = '(zea_mays zea_mays4m)';
+  }
+  else {
+    result = species.toLowerCase().replace(/ /g, '_');
+  }
+  return result;
 }
 
 translateRequestParams.FL = FL;
