@@ -2,7 +2,7 @@
 
 const DEFAULT_PORT = 11011;
 
-global.gramene = {defaultServer: "http://devdata.gramene.org/zm4/v50/swagger"};
+global.gramene = {defaultServer: "http://data.gramene.org/v50/swagger"};
 
 require('./src/taxonomyLUT'); // warm this up prior to first use, hopefully.
 
@@ -25,6 +25,6 @@ app.get('/ensemblGenomes_gene', function (req, res, next) {
     });
 });
 
-app.listen(11011, function () {
+app.listen(port, function () {
   console.log('CORS-enabled web server listening on port ' + port);
 });

@@ -76,7 +76,7 @@ function translateResult(result) {
   checkFields(result);
 
   return {
-    id: result.id.replace(/_projected$/, ''),
+    id: result.id,
     source: 'ensemblGenomes_gene',
     fields: translateFields(result)
   }
@@ -86,7 +86,7 @@ function translateFields(result) {
   var species = _.get(taxonomyLUT[result.system_name], 'name', result.system_name);
 
   return {
-    id: [result.id.replace(/_projected$/, '')],
+    id: [result.id],
     name: [result.name + ' [' + result.id + ']'],
     description: [result.description],
     location: [result.region + ':' + result.start + '-' + result.end],

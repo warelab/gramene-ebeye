@@ -15,9 +15,6 @@ grameneClient.then(function(client) {
       species = _.keyBy(taxonResponse.obj, '_id'); // _id is taxon_id
       lutVals = _.mapValues(genomes, function(genome) {
         genome.name = species[genome.taxon_id].name;
-        if(genome.system_name === 'zea_mays4m') {
-          genome.name += '4m';
-        }
         return genome;
       });
       _.assign(lut, lutVals);

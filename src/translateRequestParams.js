@@ -92,9 +92,6 @@ function speciesToSystemName(species) {
   if(species === 'Oryza sativa Japonica') {
     result = 'oryza_sativa';
   }
-  else if(species === 'Zea mays') {
-    result = '(zea_mays zea_mays4m)';
-  }
   else {
     result = species.toLowerCase().replace(/ /g, '_');
   }
