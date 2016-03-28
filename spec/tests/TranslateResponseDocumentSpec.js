@@ -138,12 +138,5 @@ describe("translateRequestParams functionality", function () {
     expect(firstValue.count).toEqual(5);
   });
 
-  it("should strip _projected from genes with an id postfixed thus", function() {
-    // given
-    var projectedResult = _.get(translateResponseDocument(resultsFixture), 'entries[10]');
-
-    expect(projectedResult.id.indexOf('_projected')).toEqual(-1);
-  });
-
 
 });

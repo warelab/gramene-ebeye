@@ -75,15 +75,4 @@ describe("translateRequestParams functionality", function () {
     expect(params.fq).toEqual('system_name:oryza_sativa');
   });
 
-  it("should correctly munge the species parameter for Zea mays", function() {
-    // given
-    var params = translateRequestParams({
-      query:'foo AND genomic_unit:plants AND species:Zea mays',
-      size:'0',
-      format:'json',
-      facetcount:'1000'
-    });
-
-    expect(params.fq).toEqual('system_name:(zea_mays zea_mays4m)');
-  });
 });
