@@ -10,7 +10,7 @@ grameneClient.then(function(client) {
     var genomes, taxonIdsList;
     genomes = _.keyBy(mapsResponse.obj, 'system_name');
     taxonIdsList = mapsResponse.obj.map(function(map) { return map.taxon_id }).join(',');
-    client['Data access'].taxonomy({idList: taxonIdsList, fl: '_id,name'}, function(taxonResponse) {
+    client['Data access'].taxonomy({idList: taxonIdsList, rows: -1, fl: '_id,name'}, function(taxonResponse) {
       var species, lutVals;
       species = _.keyBy(taxonResponse.obj, '_id'); // _id is taxon_id
       lutVals = _.mapValues(genomes, function(genome) {
