@@ -33,7 +33,7 @@ describe("translateRequestParams functionality", function () {
       format:'json'
     });
 
-    expect(params.fl).toEqual("id,name,description,taxon_id,region,start,end,system_name,db_type,genetree,synonyms");
+    expect(params.fl).toEqual("id,name,description,taxon_id,region,start,end,system_name,db_type,gene_tree,synonyms");
 
       //fl=id,name,description,taxon_id,region,start,end,system_name,db_type,genetree
   });

@@ -5,7 +5,7 @@ var _ = require('lodash');
 const EXPECTED_FORMAT = 'json';
 const EXPECTED_FIELDS = 'id,name,description,species,featuretype,location,genomic_unit,system_name,database,transcript,gene_synonym,genetree';
 const EXPECTED_GENOMIC_UNIT = 'plants';
-const FL = "id,name,description,taxon_id,region,start,end,system_name,db_type,genetree,synonyms";
+const FL = "id,name,description,taxon_id,region,start,end,system_name,db_type,gene_tree,synonyms";
 
 function translateRequestParams(ensemblParams) {
   var ensemblQuery, result;
