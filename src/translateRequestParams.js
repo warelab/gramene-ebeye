@@ -24,8 +24,8 @@ function translateRequestParams(ensemblParams) {
 
   ensemblQuery = processEnsemblQueryString(ensemblParams.query);
 
-  if (ensemblQuery.genomic_unit !== EXPECTED_GENOMIC_UNIT) {
-    throw new Error("genomic_unit should be plants; instead it's " + ensemblQuery.genomic_unit);
+  if (ensemblParams.genomic_unit !== EXPECTED_GENOMIC_UNIT) {
+    throw new Error("genomic_unit should be plants; instead it's " + ensemblParams.genomic_unit);
   }
 
   if (!ensemblQuery.q) {
