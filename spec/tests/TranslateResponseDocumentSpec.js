@@ -119,7 +119,7 @@ describe("translateRequestParams functionality", function () {
       "gene_synonym": [
         "AtBRCC36B"
       ],
-      "genetree": []
+      "genetree": [ undefined ]
     });
   });
 

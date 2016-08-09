@@ -93,7 +93,7 @@ function translateFields(result) {
     species: [species],
     system_name: [result.system_name],
     database: [result.db_type],
-    genetree: result.genetree ? [result.genetree] : [],
+    genetree: [result.gene_tree] || [],
     gene_synonym: result.synonyms || [],
 
     // hardcoded
@@ -107,7 +107,7 @@ function translateFields(result) {
 function checkFields(doc) {
   FL.forEach(function (field) {
     // it's optional.
-    if (field === 'genetree' || field === 'synonyms') return;
+    if (field === 'gene_tree' || field === 'synonyms') return;
 
     if (!doc[field]) {
       throw new Error("Doc " + doc.id + " missing field " + field);
