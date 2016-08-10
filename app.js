@@ -2,7 +2,7 @@
 
 const DEFAULT_PORT = 11011;
 
-global.gramene = {defaultServer: "http://data.gramene.org/v50/swagger"};
+global.gramene = {defaultServer: "http://data.gramene.org/v51/swagger"};
 
 require('./src/taxonomyLUT'); // warm this up prior to first use, hopefully.
 
