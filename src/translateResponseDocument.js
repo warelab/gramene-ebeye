@@ -52,7 +52,7 @@ function getSystemNameFacetValues(doc) {
     // deal with SOLR's [key1,val1,   key2,val2,   ...,   keyn,valuen] array structure.
     if (idx % 2 === 0) {
       // first the key
-      acc.push({ label: taxonomyLUT.taxon_id2name[taxon], value: item });
+      acc.push({ label: taxonomyLUT.taxon_id2name[item], value: item });
     }
     else {
       // then the value;
