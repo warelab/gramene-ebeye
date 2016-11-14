@@ -4,6 +4,8 @@ var Q = require('q');
 var jasminePit = require('jasmine-pit');
 var _ = require('lodash');
 
+var lut = require('../../src/taxonomyLUT');
+
 jasminePit.install(global);
 
 describe("translateRequestParams functionality", function () {
@@ -12,6 +14,15 @@ describe("translateRequestParams functionality", function () {
   beforeEach(function () {
     translateRequestParams = require('../../src/translateRequestParams');
   });
+
+  // it("should wait for the LUT to be ready", function () {
+  //   console.log('waiting for lut');
+  //   let i=0;
+  //   while(_.isEmpty(lut.name2taxon_id)) {
+  //     i++;
+  //   }
+  //   console.log('got lut of size', _.size(lut), 'after', i, 'iterations');
+  // });
 
   it("should error if required params are missing", function () {
     expect(function () {translateRequestParams({})}).toThrow(new Error("Expected params `query` or `size` not found"));
@@ -72,7 +83,7 @@ describe("translateRequestParams functionality", function () {
       facetcount:'1000'
     });
 
-    // expect(params.fq).toEqual('taxon_id:39947');
+    expect(params.fq).toEqual('taxon_id:39947');
   });
 
 });

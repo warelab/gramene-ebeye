@@ -1,5 +1,3 @@
-'use strict';
-
 var grameneClient = require('gramene-search-client').client.grameneClient;
 var _ = require('lodash');
 

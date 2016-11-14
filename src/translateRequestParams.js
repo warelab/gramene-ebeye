@@ -49,7 +49,12 @@ function translateRequestParams(ensemblParams) {
   };
 
   if(ensemblQuery.species) {
-    result.fq = 'taxon_id:' + taxonomyLUT.name2taxon_id[ensemblQuery.species];
+    if (ensemblQuery.species == 'Oryza sativa Japonica') {
+      result.fq = 'taxon_id:39947';
+    }
+    else {
+      result.fq = 'taxon_id:' + taxonomyLUT.name2taxon_id[ensemblQuery.species];
+    }
   }
 
   if(ensemblParams.facetcount && ensemblParams.facetcount > 0) {
