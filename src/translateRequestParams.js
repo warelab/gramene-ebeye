@@ -53,7 +53,7 @@ function translateRequestParams(ensemblParams) {
       result.fq = 'taxon_id:39947';
     }
     else {
-      result.fq = 'taxon_id:' + taxonomyLUT.name2taxon_id[ensemblQuery.species];
+      result.fq = 'taxonomy__ancestors:' + taxonomyLUT.name2taxon_id[ensemblQuery.species];
     }
   }
 
