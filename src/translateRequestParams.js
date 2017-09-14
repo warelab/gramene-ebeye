@@ -37,9 +37,9 @@ function translateRequestParams(ensemblParams) {
     throw new Error("Not expecting a requested format of " + ensemblParams.format);
   }
 
-  if (_.isString(ensemblParams.fields) && ensemblParams.fields !== EXPECTED_FIELDS) {
-    throw new Error("Not expected fields parameter value to be " + ensemblParams.fields);
-  }
+//  if (_.isString(ensemblParams.fields) && ensemblParams.fields !== EXPECTED_FIELDS) {
+//    throw new Error("Not expected fields parameter value to be " + ensemblParams.fields);
+//  }
 
   result = {
     q: ensemblQuery.q,
