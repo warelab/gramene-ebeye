@@ -21,7 +21,8 @@
     "express": "^4.13.4",
     "gramene-search-client": "^2.6.3",
     "lodash": "^4.6.1",
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "request": "^2.85.0"
   },
   "devDependencies": {
     "jasmine": "^2.4.1",
