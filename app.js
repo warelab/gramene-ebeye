@@ -1,8 +1,8 @@
 'use strict';
 
-const DEFAULT_PORT = 11057;
+const DEFAULT_PORT = 11058;
 
-global.gramene = {defaultServer: "http://data.gramene.org/v57/swagger"};
+global.gramene = {defaultServer: "http://data.gramene.org/v58/swagger"};
 
 var ebeye_rest = 'https://www.ebi.ac.uk/ebisearch/ws/rest';
 var test = 'https://www.ebi.ac.uk/ebisearch/ws/rest?format=json&size=0&query=ENSVATH00125659%20AND%20genomic_unit:plants'
