@@ -1,0 +1,256 @@
+{
+  "pad_norows": {
+    "query": "http://data.gramene.org/v52/search?q=pad&fq=taxon_id:3702&rows=0",
+    "obj": {
+      "responseHeader": {
+        "status": 0,
+        "QTime": 2,
+        "params": {
+          "q": "pad",
+          "fq": "taxon_id:3702",
+          "rows": "0",
+          "facet": "true"
+        }
+      },
+      "response": {
+        "numFound": 7,
+        "start": 0,
+        "maxScore": 22.132118,
+        "docs": [
+
+        ]
+      },
+      "facet_counts": {
+        "facet_queries": {
+        },
+        "facet_fields": {
+        },
+        "facet_ranges": {
+        },
+        "facet_intervals": {
+        },
+        "facet_heatmaps": {
+        }
+      }
+    }
+  },
+  "pad_rows": {
+    "query": "http://data.gramene.org/v52/search?q=pad&fq=taxon_id:3702&fl=id,name,description,taxon_id,region,start,end,system_name,db_type,gene_tree,synonyms",
+    "obj": {
+      "responseHeader": {
+        "status": 0,
+        "QTime": 0,
+        "params": {
+          "q": "pad",
+          "fl": [
+            "id",
+            "name",
+            "description",
+            "taxon_id",
+            "region",
+            "start",
+            "end",
+            "system_name",
+            "db_type",
+            "gene_tree",
+            "synonyms"
+          ],
+          "fq": "taxon_id:3702",
+          "facet": "true"
+        }
+      },
+      "response": {
+        "numFound": 7,
+        "start": 0,
+        "docs": [
+          {
+            "id": "AT3G26830",
+            "name": "PAD3",
+            "description": "PHYTOALEXIN DEFICIENT 3",
+            "taxon_id": 3702,
+            "region": "3",
+            "start": 9887917,
+            "end": 9889791,
+            "synonyms": [
+              "CYP71B15"
+            ],
+            "db_type": "core",
+            "system_name": "arabidopsis_thaliana",
+            "gene_tree": "EPlGT00820000103428"
+          },
+          {
+            "id": "AT3G51260",
+            "name": "PAD1",
+            "description": "20S proteasome  alpha subunit PAD1",
+            "taxon_id": 3702,
+            "region": "3",
+            "start": 19030926,
+            "end": 19033134,
+            "synonyms": [
+              "PRC6A",
+              "Q41942",
+              "Q8LB36"
+            ],
+            "db_type": "core",
+            "system_name": "arabidopsis_thaliana",
+            "gene_tree": "EPlGT00820000103466"
+          },
+          {
+            "id": "AT3G52430",
+            "name": "PAD4",
+            "description": "PHYTOALEXIN DEFICIENT 4",
+            "taxon_id": 3702,
+            "region": "3",
+            "start": 19431095,
+            "end": 19434450,
+            "synonyms": [
+              "ATPAD4",
+              "ARABIDOPSIS PHYTOALEXIN DEFICIENT 4"
+            ],
+            "db_type": "core",
+            "system_name": "arabidopsis_thaliana",
+            "gene_tree": "EPlGT00140000001539"
+          },
+          {
+            "id": "AT4G23100",
+            "name": "GSH1",
+            "description": "glutamate-cysteine ligase",
+            "taxon_id": 3702,
+            "region": "4",
+            "start": 12102135,
+            "end": 12107695,
+            "synonyms": [
+              "ATECS1",
+              "AtGSH1",
+              "CAD2",
+              "CADMIUM SENSITIVE 2",
+              "GSHA",
+              "PAD2",
+              "PHYTOALEXIN DEFICIENT 2",
+              "RML1",
+              "ROOT MERISTEMLESS 1"
+            ],
+            "db_type": "core",
+            "system_name": "arabidopsis_thaliana",
+            "gene_tree": "EPlGT00140000003145"
+          },
+          {
+            "id": "AT5G23540",
+            "name": "AT5G23540",
+            "description": "Mov34/MPN/PAD-1 family protein",
+            "taxon_id": 3702,
+            "region": "5",
+            "start": 7937630,
+            "end": 7939604,
+            "synonyms": [
+              "Q0WQQ6",
+              "Q8LD11",
+              "Mov34/MPN/PAD-1"
+            ],
+            "db_type": "core",
+            "system_name": "arabidopsis_thaliana",
+            "gene_tree": "EPlGT00140000001367"
+          },
+          {
+            "id": "AT5G27607",
+            "name": "AT5G27607",
+            "description": "JAB1/Mov34/MPN/PAD-1 ubiquitin protease",
+            "taxon_id": 3702,
+            "region": "5",
+            "start": 9760593,
+            "end": 9762087,
+            "synonyms": [
+              "JAB1/Mov34/MPN/PAD-1"
+            ],
+            "db_type": "core",
+            "system_name": "arabidopsis_thaliana"
+          },
+          {
+            "id": "AT5G66140",
+            "name": "PAD2",
+            "description": "proteasome alpha subunit D2",
+            "taxon_id": 3702,
+            "region": "5",
+            "start": 26437170,
+            "end": 26438771,
+            "synonyms": [
+              "PRC6B",
+              "PRC6C",
+              "PRS1",
+              "Q0WTK1",
+              "Q84W05",
+              "D2"
+            ],
+            "db_type": "core",
+            "system_name": "arabidopsis_thaliana",
+            "gene_tree": "EPlGT00820000103466"
+          }
+        ]
+      },
+      "facet_counts": {
+        "facet_queries": {
+        },
+        "facet_fields": {
+        },
+        "facet_ranges": {
+        },
+        "facet_intervals": {
+        },
+        "facet_heatmaps": {
+        }
+      }
+    }
+  },
+  "faceted": {
+    "query": "http://data.gramene.org/v52/search?rows=0&q=pad&fq=taxon_id:3702&fl=id,name,description,taxon_id,region,start,end,system_name,db_type,gene_tree,synonyms&facet.field={!facet.limit=%271000%27%20facet.mincount=%271%27%20key=%27taxon_id%27}taxon_id",
+    "obj": {
+      "responseHeader": {
+        "status": 0,
+        "QTime": 0,
+        "params": {
+          "q": "pad",
+          "facet.field": "{!facet.limit='1000' facet.mincount='1' key='taxon_id'}taxon_id",
+          "fl": [
+            "id",
+            "name",
+            "description",
+            "taxon_id",
+            "region",
+            "start",
+            "end",
+            "system_name",
+            "db_type",
+            "gene_tree",
+            "synonyms"
+          ],
+          "fq": "taxon_id:3702",
+          "rows": "0",
+          "facet": "true"
+        }
+      },
+      "response": {
+        "numFound": 7,
+        "start": 0,
+        "docs": [
+
+        ]
+      },
+      "facet_counts": {
+        "facet_queries": {
+        },
+        "facet_fields": {
+          "taxon_id": [
+            "3702",
+            7
+          ]
+        },
+        "facet_ranges": {
+        },
+        "facet_intervals": {
+        },
+        "facet_heatmaps": {
+        }
+      }
+    }
+  }
+}

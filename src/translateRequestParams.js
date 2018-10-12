@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
+var taxonomyLUT = require('./taxonomyLUT');
 
 const EXPECTED_FORMAT = 'json';
 const EXPECTED_FIELDS = 'id,name,description,species,featuretype,location,genomic_unit,system_name,database,transcript,gene_synonym,genetree';
@@ -36,9 +37,9 @@ function translateRequestParams(ensemblParams) {
     throw new Error("Not expecting a requested format of " + ensemblParams.format);
   }
 
-  if (_.isString(ensemblParams.fields) && ensemblParams.fields !== EXPECTED_FIELDS) {
-    throw new Error("Not expected fields parameter value to be " + ensemblParams.fields);
-  }
+//  if (_.isString(ensemblParams.fields) && ensemblParams.fields !== EXPECTED_FIELDS) {
+//    throw new Error("Not expected fields parameter value to be " + ensemblParams.fields);
+//  }
 
   result = {
     q: ensemblQuery.q,
@@ -48,11 +49,16 @@ function translateRequestParams(ensemblParams) {
   };
 
   if(ensemblQuery.species) {
-    result.fq = 'system_name:' + speciesToSystemName(ensemblQuery.species);
+    if (ensemblQuery.species == 'Oryza sativa Japonica') {
+      result.fq = 'taxon_id:39947';
+    }
+    else {
+      result.fq = 'taxonomy__ancestors:' + taxonomyLUT.name2taxon_id[ensemblQuery.species];
+    }
   }
 
   if(ensemblParams.facetcount && ensemblParams.facetcount > 0) {
-    result['facet.field'] = "{!facet.limit='#' facet.mincount='1' key='system_name'}system_name"
+    result['facet.field'] = "{!facet.limit='#' facet.mincount='1' key='taxon_id'}taxon_id"
       .replace('#', ensemblParams.facetcount);
   }
 
@@ -81,21 +87,6 @@ function processEnsemblQueryTerm(term) {
     default:
       throw new Error("Unexpected number of items from split of " + term);
   }
-}
-
-function speciesToSystemName(species) {
-  var result;
-  if (!_.isString(species)) {
-    throw new Error("Supplied species is not a string: " + species);
-  }
-
-  if(species === 'Oryza sativa Japonica') {
-    result = 'oryza_sativa';
-  }
-  else {
-    result = species.toLowerCase().replace(/ /g, '_');
-  }
-  return result;
 }
 
 translateRequestParams.FL = FL;

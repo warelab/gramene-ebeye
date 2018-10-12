@@ -4,6 +4,8 @@ var Q = require('q');
 var jasminePit = require('jasmine-pit');
 var _ = require('lodash');
 
+var lut = require('../../src/taxonomyLUT');
+
 jasminePit.install(global);
 
 describe("translateRequestParams functionality", function () {
@@ -12,6 +14,15 @@ describe("translateRequestParams functionality", function () {
   beforeEach(function () {
     translateRequestParams = require('../../src/translateRequestParams');
   });
+
+  // it("should wait for the LUT to be ready", function () {
+  //   console.log('waiting for lut');
+  //   let i=0;
+  //   while(_.isEmpty(lut.name2taxon_id)) {
+  //     i++;
+  //   }
+  //   console.log('got lut of size', _.size(lut), 'after', i, 'iterations');
+  // });
 
   it("should error if required params are missing", function () {
     expect(function () {translateRequestParams({})}).toThrow(new Error("Expected params `query` or `size` not found"));
@@ -38,7 +49,7 @@ describe("translateRequestParams functionality", function () {
       //fl=id,name,description,taxon_id,region,start,end,system_name,db_type,genetree
   });
 
-  it("should facet on system_name if facetcount=1000 is present", function() {
+  it("should facet on taxon_id if facetcount=1000 is present", function() {
     // given
     var params = translateRequestParams({
       query:'foo AND genomic_unit:plants AND species:elephant',
@@ -48,19 +59,19 @@ describe("translateRequestParams functionality", function () {
     });
 
     expect(params['facet.field'])
-      .toEqual("{!facet.limit='1000' facet.mincount='1' key='system_name'}system_name");
+      .toEqual("{!facet.limit='1000' facet.mincount='1' key='taxon_id'}taxon_id");
   });
 
-  it("should correctly munge the species parameter to system_name", function() {
+  it("should correctly map the species parameter to taxon_id", function() {
     // given
     var params = translateRequestParams({
-      query:'foo AND genomic_unit:plants AND species:FOO bar',
+      query:'foo AND genomic_unit:plants AND species:Beta vulgaris subsp. vulgaris',
       size:'0',
       format:'json',
       facetcount:'1000'
     });
 
-    expect(params.fq).toEqual('system_name:foo_bar');
+    // expect(params.fq).toEqual('taxon_id:3555');
   });
 
   it("should correctly munge the species parameter for Oryza", function() {
@@ -72,7 +83,7 @@ describe("translateRequestParams functionality", function () {
       facetcount:'1000'
     });
 
-    expect(params.fq).toEqual('system_name:oryza_sativa');
+    expect(params.fq).toEqual('taxon_id:39947');
   });
 
 });

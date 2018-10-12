@@ -46,19 +46,13 @@ function getFacets(doc) {
 }
 
 function getSystemNameFacetValues(doc) {
-  var facet = _.get(doc, 'facet_counts.facet_fields.system_name');
+  var facet = _.get(doc, 'facet_counts.facet_fields.taxon_id');
 
   return _.reduce(facet, function (acc, item, idx) {
-    var taxon, label, value;
-
     // deal with SOLR's [key1,val1,   key2,val2,   ...,   keyn,valuen] array structure.
     if (idx % 2 === 0) {
-      taxon = taxonomyLUT[item];
-      label = _.get(taxon, 'name', item);
-      value = '' + _.get(taxon, 'taxon_id', item);
-
       // first the key
-      acc.push({ label: label, value: value });
+      acc.push({ label: taxonomyLUT.taxon_id2name[item], value: item });
     }
     else {
       // then the value;
@@ -83,7 +77,7 @@ function translateResult(result) {
 }
 
 function translateFields(result) {
-  var species = _.get(taxonomyLUT[result.system_name], 'name', result.system_name);
+  var species = taxonomyLUT.taxon_id2name[result.taxon_id];
 
   return {
     id: [result.id],
