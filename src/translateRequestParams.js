@@ -47,7 +47,6 @@ function translateRequestParams(ensemblParams) {
     rows: ensemblParams.size,
     start: ensemblParams.start || 0
   };
-
   if(ensemblQuery.species) {
     if (ensemblQuery.species == 'Oryza sativa Japonica') {
       result.fq = 'taxon_id:39947';
@@ -56,12 +55,14 @@ function translateRequestParams(ensemblParams) {
       result.fq = 'taxonomy__ancestors:' + taxonomyLUT.name2taxon_id[ensemblQuery.species];
     }
   }
+  if(ensemblQuery.system_name) {
+    result.fq = `system_name:${ensemblQuery.system_name}`
+  }
 
   if(ensemblParams.facetcount && ensemblParams.facetcount > 0) {
     result['facet.field'] = "{!facet.limit='#' facet.mincount='1' key='taxon_id'}taxon_id"
       .replace('#', ensemblParams.facetcount);
   }
-
   return result;
 }
 
