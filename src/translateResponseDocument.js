@@ -16,7 +16,6 @@ function translateResponseDocument(response) {
   if (!_.isObject(doc)) {
     throw new Error("Doc is not an object: " + doc);
   }
-
   return {
     hitCount: getHitCount(doc),
     facets: getFacets(doc),
@@ -52,7 +51,7 @@ function getSystemNameFacetValues(doc) {
     // deal with SOLR's [key1,val1,   key2,val2,   ...,   keyn,valuen] array structure.
     if (idx % 2 === 0) {
       // first the key
-      acc.push({ label: taxonomyLUT.taxon_id2name[item], value: item });
+      acc.push({ label: taxonomyLUT.taxon_id2name[item], value: Math.floor(item/1000) });
     }
     else {
       // then the value;
