@@ -87,7 +87,7 @@ function translateFields(result) {
     system_name: [result.system_name],
     database: [result.db_type],
     genetree: [result.gene_tree] || [],
-    gene_synonym: result.synonyms || [],
+    gene_synonym: (result.synonyms || []).concat(result.alt_id || []),
 
     // hardcoded
     transcript: [],
