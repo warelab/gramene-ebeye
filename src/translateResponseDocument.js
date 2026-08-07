@@ -97,10 +97,17 @@ function translateFields(result) {
   };
 }
 
+// Fields in FL that are sparse in the index. Everything else in FL is on every gene doc, so a
+// missing one means the core is malformed and is worth throwing over. Measured against
+// sorghum_genes11 (5,407,132 docs): alt_id 107,226 · synonyms 34,576 · gene_tree 2,681,417 —
+// vs id/name/description/region/start/end/system_name/db_type/taxon_id at 5,407,132 each.
+// Anything added to FL must be considered here: alt_id was added to FL without being listed as
+// optional, which made checkFields throw on the 98% of genes that have no alt id.
+var OPTIONAL_FIELDS = ['gene_tree', 'synonyms', 'alt_id'];
+
 function checkFields(doc) {
   FL.forEach(function (field) {
-    // it's optional.
-    if (field === 'gene_tree' || field === 'synonyms') return;
+    if (OPTIONAL_FIELDS.indexOf(field) !== -1) return;
 
     if (!doc[field]) {
       throw new Error("Doc " + doc.id + " missing field " + field);
