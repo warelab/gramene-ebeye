@@ -86,7 +86,9 @@ function translateFields(result) {
     species: [species],
     system_name: [result.system_name],
     database: [result.db_type],
-    genetree: [result.gene_tree] || [],
+    // [x] is always truthy, so `[result.gene_tree] || []` yielded [null] for every gene
+    // without a tree -- 2.7M of 5.4M in sorghum v11, and ~2.7M here too.
+    genetree: result.gene_tree ? [result.gene_tree] : [],
     gene_synonym: (result.synonyms || []).concat(result.alt_id || []),
 
     // hardcoded
