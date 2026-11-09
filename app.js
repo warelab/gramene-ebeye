@@ -1,13 +1,13 @@
 'use strict';
 
-const DEFAULT_PORT = 51011;
+const DEFAULT_PORT = 11070;
 
 // Public swagger spec URL. swagger-client fetches the spec here, then builds
 // API request URLs from the spec's own host/schemes/basePath (data.sorghumbase.org,
 // https, /sorghum_v11). Both the spec fetch and the API calls go over real TLS,
 // so no EPROTO. For purely local testing point this at http://localhost:50011/...
 // AND set host: localhost:50011 + http in swagger.yaml so the schemes match.
-global.gramene = {defaultServer: "https://data.sorghumbase.org/sorghum_v11/swagger"};
+global.gramene = {defaultServer: "https://data.gramene.org/v70/swagger"};
 
 var ebeye_rest = 'https://www.ebi.ac.uk/ebisearch/ws/rest';
 var test = 'https://www.ebi.ac.uk/ebisearch/ws/rest?format=json&size=0&query=ENSVATH00125659%20AND%20genomic_unit:plants'
